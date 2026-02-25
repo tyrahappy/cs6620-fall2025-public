@@ -145,9 +145,28 @@ def serve_audio_segment():
 @app.route('/')
 def index():
     """
-    Renders the main HTML page for the client-side audio player.
+    Renders the updated version for Automated Deployment verification.
     """
-    return render_template('index.html') 
+    from datetime import datetime
+    return f'''
+    <h1>Hello from Automated CI/CD Pipeline!</h1>
+    <p><strong>Version:</strong> 2.0 - Automated Deployment</p>
+    <p><strong>Deployed via:</strong> GitHub Actions + AWS SSM</p>
+    <p><strong>Build Date:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
+    <p><strong>Assignment:</strong> Automated EC2 Deployment</p>
+    <hr>
+    <p><em>Note: Original audio player logic is still active in the background.</em></p>
+    '''
+
+@app.route('/health')
+def health():
+    from datetime import datetime
+    return {
+        'status': 'healthy',
+        'version': '2.0',
+        'deployment_method': 'GitHub Actions + AWS SSM',
+        'timestamp': datetime.now().isoformat()
+    }
 
 @app.route('/select_directory', methods=['POST'])
 def select_directory():
@@ -574,4 +593,4 @@ def auto_load_data():
 if __name__ == '__main__':
     # Auto-load CSV and audio files on startup
     auto_load_data()
-    app.run(debug=True, host='0.0.0.0', port=3000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
